@@ -1,4 +1,4 @@
-# Covid-19 - Flutter UI
+# Covid-19 - Flutter UI Implemented Using RapidApi
 
 ## [Watch it on YouTube](https://youtu.be/zx6uMCoW2gQ)
 
@@ -18,4 +18,8 @@
 
 ![App UI](/covid_19.png)
 
+
 ![Demo](https://user-images.githubusercontent.com/5730051/79185949-8acf3c80-7e42-11ea-984d-b098cfee5cd1.gif)
+
+**Rapid API link**
+https://rapidapi.com/api-sports/api/covid-193/endpoints
