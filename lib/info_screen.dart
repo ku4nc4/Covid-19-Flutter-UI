@@ -3,11 +3,40 @@ import 'package:covid_19/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class InfoScreen extends StatelessWidget {
+class InfoScreen extends StatefulWidget {
+  @override
+  _InfoScreenState createState() => _InfoScreenState();
+}
+
+class _InfoScreenState extends State<InfoScreen> {
+  final controller = ScrollController();
+  double offset = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.addListener(onScroll);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    controller.dispose();
+    super.dispose();
+  }
+
+  void onScroll() {
+    setState(() {
+      offset = (controller.hasClients) ? controller.offset : 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        controller: controller,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -15,6 +44,7 @@ class InfoScreen extends StatelessWidget {
               image: "assets/icons/coronadr.svg",
               textTop: "Get to know",
               textBottom: "About Covid-19.",
+              offset: offset,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -26,23 +56,26 @@ class InfoScreen extends StatelessWidget {
                     style: kTitleTextstyle,
                   ),
                   SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      SymptomCard(
-                        image: "assets/images/headache.png",
-                        title: "Headache",
-                        isActive: true,
-                      ),
-                      SymptomCard(
-                        image: "assets/images/caugh.png",
-                        title: "Caugh",
-                      ),
-                      SymptomCard(
-                        image: "assets/images/fever.png",
-                        title: "Fever",
-                      ),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        SymptomCard(
+                          image: "assets/images/headache.png",
+                          title: "Headache",
+                          isActive: true,
+                        ),
+                        SymptomCard(
+                          image: "assets/images/caugh.png",
+                          title: "Caugh",
+                        ),
+                        SymptomCard(
+                          image: "assets/images/fever.png",
+                          title: "Fever",
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 20),
                   Text("Prevention", style: kTitleTextstyle),
@@ -122,10 +155,14 @@ class PreventCard extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    Text(
-                      text,
-                      style: TextStyle(
-                        fontSize: 12,
+                    Expanded(
+                      child: Text(
+                        text,
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
                       ),
                     ),
                     Align(
