@@ -1,5 +1,9 @@
 # Covid-19 - Flutter UI Implemented Using RapidApi
 
+**TodoList**
+Refresh every several minutes
+Pull to refresh
+
 ## [Watch it on YouTube](https://youtu.be/zx6uMCoW2gQ)
 
 **Packages we are using:**
